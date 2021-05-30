@@ -3,12 +3,6 @@ let ctx = canvas.getContext("2d");
 
 console.log(ctx);
 
-//const lec = "(x+10.2)^2+5*y-z";
-// const str = "x + y";
-// const x = 5;
-// const y = 2 * x;
-// console.log(eval(str));
-
 function UException(message) {
     this.message = message;
     this.name = "some exception";
@@ -111,7 +105,7 @@ class MatchParser {
         let i = 0;
         let dot_cnt = 0;
         let negative = false;
-        let s = str; // let s = str;
+        let s = str;
         // Первый символ - минус
         if (str[0] == '-') {
             negative = true;
@@ -142,13 +136,11 @@ class MatchParser {
         let f = "";
         let i = 0; 
 
-        //let condition = (i < str.length && ( isLetter(str[i]) || (!isNaN(str[i]) && i > 0 )));
-
         // Поиск названия функции или переменной 
         // Имя должно начинаться с буквы
+
         console.log(!isNaN(str[i]));
 
-        //while (i < str.length && (isLetter(str[i]) || (!isNaN(str[i]) && i > 0) )) {
         while (i < str.length && ( isLetter(str[i]) || (!isNaN(str[i]) && i > 0 ))) {
             f += str[i];
             i++;
@@ -174,7 +166,6 @@ class MatchParser {
         let acc = current.acc;
 
         while (true) {
-            //if (current.rest.length == 0 && current.rest != undefined)
             if (current.rest.length == 0)
                 return current;
 
@@ -218,8 +209,7 @@ class MatchParser {
 debugger;
 
 let parser_ = new MatchParser();
-//let formulas = ["2+2*2", "5+9*15", "2+X*2", "sin(90)+4-cos(0)", "2--4", "2**3*5-----7", "3.5.6-2"];
-let formulas = ["2--4"];
+let formulas = ["2+2*2", "5+9*15", "2+X*2", "sin(90)+4-cos(0)", "2--4", "2**3*5-----7", "3.5.6-2"];
     parser_.setVariable("X", 2.0);
 
 for (let i = 0; i < formulas.length; i++) {
