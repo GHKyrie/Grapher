@@ -111,16 +111,16 @@ class MatchParser {
         let i = 0;
         let dot_cnt = 0;
         let negative = false;
-        let s; // let s = str;
+        let s = str; // let s = str;
         // Первый символ - минус
         if (str[0] == '-') {
             negative = true;
             s = str.slice(1);
         }
         // Разрешаем только цифры и точку 
-        while (i < str.length && (!isNaN(str[i]) || str[i] == '.')) {
-            if (str[i] == '.' && ++dot_cnt > 1) 
-                throw new UException(`Invalid number ${str.slice(0, i + 1)}`);
+        while (i < s.length && (!isNaN(s[i]) || s[i] == '.')) {
+            if (s[i] == '.' && ++dot_cnt > 1) 
+                throw new UException(`Invalid number ${s.slice(0, i + 1)}`);
             i++;
         }
         // Ничего похожего на точку найдено не было
@@ -128,17 +128,17 @@ class MatchParser {
             throw new UException(`Can't get a valid number + ${s}`);
 
         /* Здесь посмотреть будет ли все правильно парситься, если нет, то сделать i + 1 */
-        let dPart = Number(str.slice(0, i)); 
+        let dPart = Number(s.slice(0, i)); 
 
         if (negative) 
             dPart = -dPart;
         /* Здесь то же самое */
-        let restPart = str.slice(i);
+        let restPart = s.slice(i);
 
         return new Result(dPart, restPart);
     }
 
-    FunctionVariable(str) { // ГДЕ-ТО ЗДЕСЬ ОШИБКА!!!!!
+    FunctionVariable(str) {
         let f = "";
         let i = 0; 
 
@@ -218,8 +218,8 @@ class MatchParser {
 debugger;
 
 let parser_ = new MatchParser();
-let formulas = ["2+2*2", "5+9*15", "2+X*2", "sin(90)+4-cos(0)", "2--4", "2**3*5-----7", "3.5.6-2"];
-//let formulas = ["2+X*2"];
+//let formulas = ["2+2*2", "5+9*15", "2+X*2", "sin(90)+4-cos(0)", "2--4", "2**3*5-----7", "3.5.6-2"];
+let formulas = ["2--4"];
     parser_.setVariable("X", 2.0);
 
 for (let i = 0; i < formulas.length; i++) {
